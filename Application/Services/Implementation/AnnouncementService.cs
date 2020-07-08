@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Application.Dto;
 using AutoMapper;
@@ -37,8 +39,14 @@ namespace Application.Services.Implementation
         /// <inheritdoc />
         public async Task<AnnouncementDetailsDto> GetByIdAsync(int announcementId)
         {
-            return _mapper.Map<AnnouncementDetailsDto>(
+            var announcement = _mapper.Map<AnnouncementDetailsDto>(
                 await _announcementRepository.FindByCondition(x => x.Id == announcementId));
+            var similarAnnouncements = _announcementRepository.GetAll().ToList()
+                .Where(x=> x.Title.Split(' ')
+                    .Any(w=> announcement.Title.Contains(w))).Where(x => x.Description.Split(' ')
+                    .Any(w => announcement.Description.Contains(w))).Where(x=>x.Id != announcementId).Take(3);
+            announcement.SimilarAnnouncements = _mapper.Map<List<AnnouncementGetDto>>(similarAnnouncements);
+            return announcement;
         }
 
         /// <inheritdoc />

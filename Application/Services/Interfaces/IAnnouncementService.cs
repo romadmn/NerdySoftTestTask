@@ -9,7 +9,7 @@ namespace Application.Services.Interfaces
     public interface IAnnouncementService
     {
         /// <summary>
-        /// Retrieve announcement by ID
+        /// Retrieve announcement by ID with all similar announcements
         /// </summary>
         /// <param name="announcementId">announcement's ID</param>
         /// <returns>returns announcement DTO</returns>

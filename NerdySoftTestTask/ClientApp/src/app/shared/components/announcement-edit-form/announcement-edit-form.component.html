@@ -1,0 +1,44 @@
+<section class="backdrop">
+
+  <form
+    [formGroup]="editAnnouncementForm"
+    #ngForm="ngForm"
+    (ngSubmit)="onSubmit()"
+    class="form-popup text-center border border-light p-5"
+  >
+    <p class="h2 mb-4 title">Edit announcement</p>
+      <div class="form-row mb-4">
+        <div class="col-3">
+          <p class="input-label">Title:<span class="asterisk"> *</span></p>
+        </div>
+        <div class="col-4">
+          <!-- Book title -->
+          <input
+            formControlName="title"
+            type="text"
+            class="form-control"
+            maxlength="50"
+          />
+        </div>
+      </div>
+    <div class="form-row mb-4">
+      <div class="col-3">
+        <p class="input-label">Description:<span class="asterisk"> *</span></p>
+      </div>
+      <div class="col-4">
+        <!-- Book title -->
+        <input
+          formControlName="description"
+          type="text"
+          class="form-control"
+          maxlength="1000"
+        />
+      </div>
+    </div>
+
+    <button class="btn btn-info" type="submit" name="submit">
+      Save
+    </button>
+    <input type="button" class="btn" (click)="cancel()" value="Cancel" />
+  </form>
+</section>

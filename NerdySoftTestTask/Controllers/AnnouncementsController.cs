@@ -38,7 +38,7 @@ namespace NerdySoftTestTask.Controllers
 
         // POST: api/Announcements
         [HttpPost]
-        public async Task<ActionResult<AnnouncementPostDto>> PostAsync([FromForm] AnnouncementPostDto announcementDto)
+        public async Task<ActionResult<AnnouncementPostDto>> PostAsync([FromBody] AnnouncementPostDto announcementDto)
         {
             var insertedAnnouncement = await _announcementService.AddAsync(announcementDto);
             return CreatedAtAction("GetByIdAsync", new { id = insertedAnnouncement.Id }, insertedAnnouncement);
